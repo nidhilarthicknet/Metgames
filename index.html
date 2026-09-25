@@ -1,40 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>METGAMES — A METXON PRODUCT</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070b16">
+<meta name="description" content="MetGames — A METXON Product">
+<title>MetGames — A METXON Product</title>
 
 <style>
 :root{
-  --bg:#070912;
-  --panel:#101522;
-  --panel2:#151c2c;
-  --line:#273149;
-  --text:#f5f7ff;
-  --muted:#8e99b2;
-  --blue:#38a8ff;
-  --cyan:#36e4ff;
-  --red:#ff3f63;
-  --green:#45e69a;
+  --bg:#060914;
+  --panel:#0d1528;
+  --panel2:#111b31;
+  --line:#26375b;
+  --text:#eef3ff;
+  --muted:#9ba9c7;
+  --blue:#5da7ff;
+  --cyan:#55e7ff;
+  --red:#ff5369;
+  --green:#63e6a4;
+  --yellow:#ffd45d;
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
   margin:0;
-  background:
-    radial-gradient(circle at 20% 0%,rgba(35,150,255,.12),transparent 35%),
-    radial-gradient(circle at 90% 20%,rgba(255,40,90,.10),transparent 30%),
-    var(--bg);
-  color:var(--text);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   min-height:100vh;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 15% 0,#17345d55,transparent 35%),
+    radial-gradient(circle at 85% 20%,#30205c33,transparent 30%),
+    linear-gradient(#070b16,#050812);
+  font-family:Segoe UI,Arial,sans-serif;
 }
 
-button,input,textarea,select{
+button,
+input,
+textarea,
+select{
   font:inherit;
 }
 
@@ -43,606 +53,611 @@ button{
 }
 
 a{
-  color:inherit;
-  text-decoration:none;
+  color:#a9c8ff;
 }
 
-/* ---------- TRANSITION ---------- */
-
-#transition{
-  position:fixed;
-  inset:0;
-  z-index:99999;
-  background:#03050a;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  pointer-events:none;
-  opacity:0;
-  visibility:hidden;
-  transition:opacity .2s ease;
+.shell{
+  width:min(1200px,calc(100% - 40px));
+  margin:auto;
 }
 
-#transition.show{
-  opacity:1;
-  visibility:visible;
-}
-
-.transition-word{
-  font-size:clamp(48px,10vw,130px);
-  font-weight:1000;
-  letter-spacing:-8px;
-  color:white;
-}
-
-.transition-word .met{
-  color:#39a9ff;
-}
-
-.transition-word .xon{
-  color:#ff4167;
-  opacity:0;
-  transform:translateX(30px);
-  display:inline-block;
-  transition:.45s ease;
-}
-
-#transition.reveal .xon{
-  opacity:1;
-  transform:translateX(0);
-}
-
-/* ---------- HEADER ---------- */
+/* =========================
+   HEADER
+========================= */
 
 header{
-  height:76px;
-  border-bottom:1px solid rgba(255,255,255,.07);
-  background:rgba(7,9,18,.86);
-  backdrop-filter:blur(18px);
-  display:flex;
-  align-items:center;
-  padding:0 28px;
   position:sticky;
   top:0;
-  z-index:1000;
+  z-index:20;
+  background:#050812dd;
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:12px;
-  min-width:210px;
+  gap:10px;
+  min-width:205px;
+  text-decoration:none;
+  color:white;
 }
 
 .brand img{
-  width:150px;
-  max-height:50px;
+  width:48px;
+  height:48px;
   object-fit:contain;
+  border-radius:11px;
 }
 
-.brand-fallback{
-  display:none;
-  font-size:25px;
-  font-weight:1000;
-  letter-spacing:-1px;
+.brand b{
+  display:block;
+  font-size:18px;
+  letter-spacing:.4px;
 }
 
-nav{
+.brand small{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  letter-spacing:1.5px;
+  margin-top:1px;
+}
+
+.links{
   display:flex;
-  align-items:center;
-  gap:6px;
   flex:1;
+  gap:3px;
 }
 
-nav button{
-  background:none;
+.links button,
+.network button{
   border:0;
-  color:#aeb7cb;
-  padding:10px 13px;
+  background:transparent;
+  color:#b8c4dd;
+  padding:10px 11px;
   border-radius:10px;
-  font-weight:700;
 }
 
-nav button:hover,
-nav button.active{
+.links button:hover,
+.links button.active,
+.network button:hover{
+  background:#ffffff0d;
   color:white;
-  background:rgba(255,255,255,.07);
+}
+
+.network{
+  display:flex;
+  border-left:1px solid var(--line);
+  padding-left:6px;
 }
 
 .account{
   display:flex;
+  gap:7px;
   align-items:center;
-  gap:10px;
 }
 
-.account-name{
-  color:#aeb7cb;
-  font-size:14px;
+.primary,
+.secondary,
+.pill{
+  border-radius:11px;
+  padding:10px 14px;
 }
 
-.btn{
-  border:1px solid var(--line);
-  background:var(--panel2);
-  color:white;
-  padding:10px 15px;
-  border-radius:10px;
+.primary{
+  border:0;
+  background:linear-gradient(135deg,#5caaff,#48d8ff);
+  color:#04101a;
   font-weight:800;
 }
 
-.btn:hover{
-  border-color:#456080;
+.primary:hover{
+  filter:brightness(1.08);
 }
 
-.btn.primary{
-  background:linear-gradient(135deg,#258cff,#35caff);
-  border:0;
-  color:#03101c;
+.secondary,
+.pill{
+  border:1px solid var(--line);
+  background:#ffffff08;
+  color:#eef3ff;
 }
 
-.btn.danger{
-  background:#32141d;
-  border-color:#5d2634;
+.secondary:hover{
+  background:#ffffff12;
 }
 
-.btn.green{
-  background:#113c2d;
-  border-color:#24694d;
-  color:#8dffca;
+.pill{
+  border-radius:999px;
+  padding:7px 10px;
 }
 
-/* ---------- APP ---------- */
-
-#app{
-  max-width:1400px;
-  margin:auto;
-  padding:35px 25px 80px;
-}
+/* =========================
+   HERO
+========================= */
 
 .hero{
-  min-height:480px;
+  padding:70px 0 35px;
   display:grid;
-  grid-template-columns:1.2fr .8fr;
+  grid-template-columns:1.15fr .85fr;
+  gap:28px;
   align-items:center;
-  gap:40px;
 }
 
-.hero h1{
-  font-size:clamp(48px,8vw,100px);
-  line-height:.88;
-  margin:0 0 25px;
-  letter-spacing:-7px;
+.eyebrow{
+  color:var(--cyan);
+  font-size:11px;
+  letter-spacing:2px;
+  font-weight:800;
+  text-transform:uppercase;
 }
 
-.gradient{
-  background:linear-gradient(90deg,#35a6ff,#55e5ff,#ff466b);
-  -webkit-background-clip:text;
-  color:transparent;
+h1{
+  font-size:clamp(44px,7vw,78px);
+  line-height:.97;
+  letter-spacing:-3px;
+  margin:10px 0 18px;
+}
+
+h2{
+  font-size:30px;
+  margin:0 0 10px;
+}
+
+h3{
+  margin:0 0 5px;
+}
+
+p{
+  margin-top:7px;
+}
+
+.muted{
+  color:var(--muted);
 }
 
 .hero p{
-  max-width:650px;
-  color:#a6afc2;
-  line-height:1.7;
-  font-size:17px;
+  font-size:18px;
+  max-width:700px;
 }
 
-.hero-actions{
-  display:flex;
-  gap:12px;
-  margin-top:25px;
-  flex-wrap:wrap;
-}
-
-.hero-card{
-  background:linear-gradient(145deg,#111a2a,#0b101b);
+.heroart{
+  height:330px;
   border:1px solid var(--line);
-  border-radius:25px;
-  padding:30px;
-  box-shadow:0 30px 80px rgba(0,0,0,.3);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 35% 30%,#56d9ff33,transparent 30%),
+    radial-gradient(circle at 75% 75%,#ff536922,transparent 25%),
+    linear-gradient(145deg,#16294b,#080d1c);
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  box-shadow:0 25px 70px #0005;
 }
 
-.hero-card h3{
-  margin-top:0;
+.heroart img{
+  width:72%;
+  max-height:240px;
+  object-fit:contain;
+  filter:drop-shadow(0 15px 35px #0008);
 }
 
-.hero-card p{
-  font-size:14px;
+/* =========================
+   SECTIONS
+========================= */
+
+.section{
+  padding:28px 0 55px;
 }
 
-/* ---------- SECTIONS ---------- */
-
-.section-title{
+.head{
   display:flex;
-  align-items:end;
   justify-content:space-between;
-  gap:20px;
-  margin:35px 0 17px;
-}
-
-.section-title h2{
-  margin:0;
-  font-size:27px;
-}
-
-.section-title span{
-  color:var(--muted);
-  font-size:14px;
+  align-items:end;
+  gap:15px;
+  margin-bottom:18px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  grid-template-columns:repeat(3,1fr);
   gap:17px;
 }
 
 .card{
-  background:linear-gradient(145deg,#111827,#0c111c);
   border:1px solid var(--line);
-  border-radius:16px;
+  border-radius:19px;
   overflow:hidden;
+  background:
+    linear-gradient(145deg,#141e35cc,#080d18ee);
+  box-shadow:0 14px 45px #0004;
   transition:.2s ease;
 }
 
 .card:hover{
   transform:translateY(-3px);
-  border-color:#3a4967;
+  border-color:#3e5787;
 }
 
-.thumbnail{
-  height:145px;
+.thumb{
+  height:155px;
+  display:grid;
+  place-items:center;
   background:
-    linear-gradient(135deg,rgba(45,159,255,.4),rgba(255,50,100,.35)),
-    #101728;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-  font-weight:1000;
+    radial-gradient(circle at 30% 25%,#55e7ff3d,transparent 30%),
+    radial-gradient(circle at 75% 70%,#ff536922,transparent 25%),
+    linear-gradient(135deg,#111d37,#080d1c);
+  font-size:54px;
 }
 
-.card-body{
-  padding:15px;
-}
-
-.card h3{
-  margin:0 0 6px;
-}
-
-.card p{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.5;
+.body{
+  padding:17px;
 }
 
 .meta{
   display:flex;
   gap:7px;
   flex-wrap:wrap;
-  margin-top:10px;
+  margin:9px 0;
 }
 
 .tag{
-  border:1px solid var(--line);
-  padding:4px 8px;
-  border-radius:7px;
-  color:#aeb9cd;
   font-size:11px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:4px 8px;
+  color:#bac7e2;
 }
 
-.empty{
-  border:1px dashed #2c3950;
-  padding:40px;
-  border-radius:15px;
-  text-align:center;
-  color:var(--muted);
-}
-
-/* ---------- AUTH ---------- */
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.72);
-  backdrop-filter:blur(12px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:9000;
-  padding:20px;
-}
-
-.modal.open{
+.actions{
   display:flex;
+  gap:8px;
+  margin-top:13px;
 }
 
-.modal-box{
-  width:min(480px,100%);
-  background:#0d1320;
-  border:1px solid #2a3750;
-  border-radius:20px;
-  padding:28px;
-  box-shadow:0 30px 100px rgba(0,0,0,.6);
+.actions>*{
+  flex:1;
 }
 
-.modal-box h2{
-  margin-top:0;
+.details{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:12px;
 }
+
+.detail{
+  background:#ffffff06;
+  border-radius:10px;
+  padding:9px;
+  font-size:11px;
+  color:#b9c6df;
+}
+
+.detail b{
+  display:block;
+  color:white;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  margin-bottom:2px;
+}
+
+/* =========================
+   BANNER
+========================= */
+
+.banner{
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:
+    linear-gradient(90deg,#4380ff18,#ff4d6912);
+}
+
+/* =========================
+   TABS
+========================= */
+
+.tabs{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin:18px 0;
+}
+
+.tabs button{
+  border:1px solid var(--line);
+  background:#ffffff07;
+  color:#bdc9e2;
+  padding:8px 11px;
+  border-radius:10px;
+}
+
+.tabs button:hover,
+.tabs button.active{
+  color:white;
+  background:#53abff18;
+}
+
+/* =========================
+   FORMS
+========================= */
 
 .form{
   display:grid;
-  gap:13px;
+  gap:11px;
 }
 
 label{
-  color:#aeb9cd;
-  font-size:13px;
-  font-weight:700;
+  display:block;
+  font-size:11px;
+  color:#aab7d1;
+  margin-bottom:5px;
 }
 
-input,textarea,select{
+input,
+textarea,
+select{
   width:100%;
-  background:#080d17;
-  border:1px solid #29364e;
+  border:1px solid var(--line);
+  background:#080e1d;
   color:white;
-  padding:12px;
-  border-radius:9px;
-  outline:none;
+  border-radius:11px;
+  padding:11px;
+  outline:0;
 }
 
-input:focus,textarea:focus,select:focus{
-  border-color:#398fd0;
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#4c78b8;
+  box-shadow:0 0 0 2px #4c78b822;
 }
 
 textarea{
-  min-height:100px;
+  min-height:95px;
   resize:vertical;
 }
 
-.form-row{
+.row{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.form-error{
-  color:#ff7089;
-  font-size:13px;
-}
-
-.switch{
-  color:#8fa0ba;
-  font-size:13px;
-  text-align:center;
-  margin-top:12px;
-}
-
-.switch button{
-  border:0;
-  background:none;
-  color:#46b8ff;
-}
-
-/* ---------- CREATOR ---------- */
-
-.creator-layout{
-  display:grid;
-  grid-template-columns:240px 1fr 260px;
-  min-height:600px;
-  gap:15px;
-}
-
-.creator-panel{
-  background:#0d1320;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:15px;
-}
-
-.creator-panel h3{
-  margin-top:0;
-}
-
-.tool{
-  width:100%;
-  text-align:left;
-  margin-bottom:8px;
-}
-
-.canvas-wrap{
-  background:#060910;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:15px;
-  overflow:auto;
-}
-
-#gameCanvas{
-  display:block;
-  background:
-    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px),
-    #101724;
-  background-size:25px 25px;
-  border-radius:8px;
-  max-width:100%;
-  touch-action:none;
-}
-
-.creator-actions{
-  display:flex;
   gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:15px;
 }
 
-.object-list{
-  max-height:250px;
-  overflow:auto;
-}
+/* =========================
+   MODALS
+========================= */
 
-.object-row{
-  display:flex;
-  justify-content:space-between;
-  gap:5px;
-  padding:8px;
-  margin-bottom:5px;
-  border:1px solid #243047;
-  border-radius:7px;
-  font-size:12px;
-}
-
-.object-row.selected{
-  border-color:#38a8ff;
-}
-
-.status{
-  font-size:12px;
-  color:#7f91ac;
-}
-
-/* ---------- GAME PLAYER ---------- */
-
-.player-shell{
-  max-width:1100px;
-  margin:auto;
-}
-
-.player-top{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  align-items:center;
-  margin-bottom:15px;
-}
-
-#playCanvas{
-  width:100%;
-  max-width:1000px;
-  height:auto;
-  aspect-ratio:16/9;
-  background:#101724;
-  border:1px solid var(--line);
-  border-radius:15px;
-  display:block;
-  touch-action:none;
-}
-
-.play-info{
-  margin-top:15px;
-  background:#0d1320;
-  border:1px solid var(--line);
-  border-radius:15px;
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:#000b;
+  backdrop-filter:blur(8px);
+  place-items:center;
   padding:18px;
 }
 
-.play-info h1{
-  margin:0;
+.modal.show{
+  display:grid;
 }
 
-.rating-row{
-  display:flex;
-  gap:7px;
-  align-items:center;
-  margin-top:12px;
+.modalbox{
+  width:min(520px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#090f1e;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 30px 100px #000b;
 }
 
-.star{
+.close{
+  float:right;
   border:0;
   background:none;
-  font-size:23px;
-  color:#68748b;
-  padding:0;
+  color:#9da9c4;
+  font-size:24px;
 }
 
-.star.active{
-  color:#ffd45a;
+/* =========================
+   MET XON TRANSITION
+========================= */
+
+#transition{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:999;
+  background:#03050b;
+  place-items:center;
 }
 
-/* ---------- PROFILE ---------- */
+#transition.show{
+  display:grid;
+}
+
+#transition div{
+  font-size:clamp(60px,13vw,150px);
+  font-weight:950;
+  letter-spacing:-8px;
+  animation:transitionPulse .45s ease;
+}
+
+.met{
+  color:var(--blue);
+}
+
+.xon{
+  color:var(--red);
+}
+
+@keyframes transitionPulse{
+  0%{
+    opacity:0;
+    transform:scale(.88);
+  }
+  100%{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+/* =========================
+   PLAYER
+========================= */
+
+.player{
+  border:1px solid var(--line);
+  border-radius:19px;
+  overflow:hidden;
+  background:#050814;
+  margin-top:20px;
+}
+
+.player canvas{
+  display:block;
+  width:100%;
+  height:auto;
+  background:#08101e;
+}
+
+.hud{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:9px 12px;
+  background:#080d19;
+  color:#b7c3dd;
+  font-size:11px;
+}
+
+/* =========================
+   PROFILE
+========================= */
 
 .profile{
-  max-width:800px;
-  margin:auto;
-}
-
-.profile-head{
-  background:#0d1320;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:25px;
-  display:flex;
-  gap:20px;
-  align-items:center;
+  display:grid;
+  grid-template-columns:230px 1fr;
+  gap:18px;
 }
 
 .avatar{
-  width:80px;
-  height:80px;
+  width:120px;
+  height:120px;
+  border:1px solid var(--line);
   border-radius:50%;
-  background:linear-gradient(135deg,#35a8ff,#ff3d67);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:1000;
-  font-size:28px;
+  display:grid;
+  place-items:center;
+  font-size:45px;
+  background:linear-gradient(135deg,#18284b,#0c1428);
+  margin-bottom:12px;
 }
 
-/* ---------- FOOTER ---------- */
+.empty{
+  text-align:center;
+  padding:35px;
+  border:1px dashed var(--line);
+  border-radius:18px;
+  color:#8996b2;
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
-  border-top:1px solid rgba(255,255,255,.07);
-  padding:25px;
-  text-align:center;
-  color:#69758d;
+  border-top:1px solid var(--line);
+  padding:27px 0 38px;
+  color:#7785a3;
   font-size:12px;
 }
 
 footer a{
-  color:#48baff;
+  word-break:break-all;
 }
 
-@media(max-width:950px){
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+  .nav{
+    flex-wrap:wrap;
+    padding:9px 0;
+  }
+
+  .links{
+    order:3;
+    width:100%;
+    overflow:auto;
+  }
+
+  .network{
+    display:none;
+  }
+
   .hero{
     grid-template-columns:1fr;
   }
 
-  .creator-layout{
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .profile{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:620px){
+
+  .shell{
+    width:min(100% - 28px,1200px);
+  }
+
+  .grid,
+  .row,
+  .details{
     grid-template-columns:1fr;
   }
 
-  header{
-    height:auto;
-    min-height:76px;
-    flex-wrap:wrap;
-    padding:12px;
+  .hero{
+    padding-top:40px;
+  }
+
+  h1{
+    letter-spacing:-2px;
   }
 
   .brand{
     min-width:auto;
   }
 
-  nav{
-    order:3;
-    width:100%;
-    overflow:auto;
+  .brand b{
+    font-size:15px;
   }
 
-  .account-name{
-    display:none;
-  }
-}
-
-@media(max-width:600px){
-  #app{
-    padding:20px 13px 60px;
+  .brand img{
+    width:42px;
+    height:42px;
   }
 
-  .hero h1{
-    letter-spacing:-4px;
-  }
-
-  .form-row{
-    grid-template-columns:1fr;
+  .account{
+    margin-left:auto;
   }
 }
 </style>
@@ -650,1733 +665,2773 @@ footer a{
 
 <body>
 
+<!-- ==========================================
+     MET → XON TRANSITION
+=========================================== -->
+
 <div id="transition">
-  <div class="transition-word">
-    <span class="met">MET</span><span class="xon">XON</span>
-  </div>
+  <div id="tword" class="met">MET</div>
 </div>
 
+<!-- ==========================================
+     HEADER
+=========================================== -->
+
 <header>
-  <a class="brand" href="#home" onclick="navigate('home')">
-    <img src="image.png" alt="METGAMES" onerror="this.style.display='none';document.querySelector('.brand-fallback').style.display='block'">
-    <span class="brand-fallback">METGAMES</span>
-  </a>
 
-  <nav>
-    <button data-nav="home" onclick="navigate('home')">Home</button>
-    <button data-nav="play" onclick="navigate('play')">Play</button>
-    <button data-nav="trailers" onclick="navigate('trailers')">Watch Trailers</button>
-    <button data-nav="create" onclick="navigate('create')">Create</button>
-    <button data-nav="profile" onclick="navigate('profile')">Profile</button>
-  </nav>
+<div class="shell nav">
 
-  <div class="account">
-    <span class="account-name" id="accountName">Guest</span>
-    <button class="btn" id="accountButton" onclick="openAuth()">Login</button>
-  </div>
+<a class="brand" href="#home" onclick="go('home')">
+
+<img src="image.png" alt="MetGames logo">
+
+<span>
+<b>METGAMES</b>
+<small>A METXON PRODUCT</small>
+</span>
+
+</a>
+
+<nav class="links">
+
+<button data-n="home" onclick="go('home')">
+Home
+</button>
+
+<button data-n="play" onclick="go('play')">
+Play
+</button>
+
+<button data-n="trailers" onclick="go('trailers')">
+Watch Trailers
+</button>
+
+<button data-n="create" onclick="go('create')">
+Create
+</button>
+
+<button data-n="profile" onclick="go('profile')">
+Profile
+</button>
+
+</nav>
+
+<div class="network">
+
+<button>
+Molecule
+</button>
+
+<button>
+Mettin
+</button>
+
+</div>
+
+<div class="account" id="account"></div>
+
+</div>
+
 </header>
+
+
+<!-- ==========================================
+     MAIN APPLICATION
+=========================================== -->
 
 <main id="app"></main>
 
+
+<!-- ==========================================
+     FOOTER
+=========================================== -->
+
 <footer>
-  <div>© 2026 METGAMES — A METXON PRODUCT</div>
-  <div style="margin-top:7px">
-    Original Metxon website:
-    <a href="https://nidhilarthicknet.github.io/metxon/" target="_blank">
-      nidhilarthicknet.github.io/metxon
-    </a>
-  </div>
-</footer>
 
-<!-- AUTH -->
+<div class="shell">
 
-<div class="modal" id="authModal">
-  <div class="modal-box">
-    <h2 id="authTitle">Login to METGAMES</h2>
+© 2026 MetGames. A METXON Product.
 
-    <form class="form" id="authForm">
+<br>
 
-      <div id="registerFields" style="display:none">
-        <div class="form">
-          <div>
-            <label>Username</label>
-            <input id="username" autocomplete="username">
-          </div>
+Original METXON website:
 
-          <div>
-            <label>Display name</label>
-            <input id="displayName">
-          </div>
+<a
+href="https://nidhilarthicknet.github.io/metxon/"
+target="_blank"
+rel="noopener"
+>
+https://nidhilarthicknet.github.io/metxon/
+</a>
 
-          <div>
-            <label>Age category</label>
-            <select id="ageCategory">
-              <option value="under_13">Under 13</option>
-              <option value="13_15">13–15</option>
-              <option value="16_17">16–17</option>
-              <option value="18_plus">18+</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <label>Email</label>
-        <input id="email" type="email" required autocomplete="email">
-      </div>
-
-      <div>
-        <label>Password</label>
-        <input id="password" type="password" required autocomplete="current-password">
-      </div>
-
-      <div id="authError" class="form-error"></div>
-
-      <button class="btn primary" type="submit" id="authSubmit">
-        Login
-      </button>
-    </form>
-
-    <div class="switch">
-      <span id="switchText">New to METGAMES?</span>
-      <button onclick="toggleAuthMode()" id="switchButton">Create account</button>
-    </div>
-
-    <div style="text-align:center;margin-top:15px">
-      <button class="btn" onclick="closeAuth()">Close</button>
-    </div>
-  </div>
 </div>
 
+</footer>
+
+
+<!-- ==========================================
+     LOGIN MODAL
+=========================================== -->
+
+<div class="modal" id="auth">
+
+<div class="modalbox">
+
+<button class="close" onclick="closeM('auth')">
+×
+</button>
+
+<div id="authBox"></div>
+
+</div>
+
+</div>
+
+
+<!-- ==========================================
+     GENERAL MODAL
+=========================================== -->
+
+<div class="modal" id="modal">
+
+<div class="modalbox">
+
+<button class="close" onclick="closeM('modal')">
+×
+</button>
+
+<div id="modalBox"></div>
+
+</div>
+
+</div>
+
+
+<!-- ==========================================
+     SUPABASE
+=========================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-/* ============================================================
-   METGAMES SUPABASE CONFIG
-   ============================================================ */
 
-const SUPABASE_URL = "https://xnnnxinsnedjafltsuqo.supabase.co";
-const SUPABASE_KEY = "sb_publishable_86rJNEFS_sOXfsZZ6gr4ow_sLngjj_i";
+/* ==========================================
+   SUPABASE CONFIGURATION
+=========================================== */
 
-const { createClient } = supabase;
+const SUPABASE_URL =
+"https://xnnnxinsnedjafltsuqo.supabase.co";
 
-const db = createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY,
-  {
-    auth:{
-      persistSession:false,
-      autoRefreshToken:false,
-      detectSessionInUrl:true
-    }
-  }
-);
+const SUPABASE_KEY =
+"sb_publishable_86rJNEFS_sOXfsZZ6gr4ow_sLngjj_i";
 
-/* ============================================================
-   STATE
-   ============================================================ */
-
-let currentUser = null;
-let currentProfile = null;
-let currentPage = "home";
-
-let editor = {
-  game:null,
-  version:null,
-  objects:[],
-  selected:null,
-  dirty:false,
-  testMode:false
-};
-
-let authMode = "login";
-
-/* ============================================================
-   MET → LOADING → XON
-   ============================================================ */
-
-async function transition(){
-  const t = document.getElementById("transition");
-
-  t.classList.add("show");
-  t.classList.remove("reveal");
-
-  await sleep(350);
-
-  await sleep(250);
-
-  t.classList.add("reveal");
-
-  await sleep(450);
-
-  t.classList.remove("show","reveal");
-
-  await sleep(120);
-}
-
-function sleep(ms){
-  return new Promise(resolve=>setTimeout(resolve,ms));
-}
-
-/* ============================================================
-   AUTH
-   ============================================================ */
-
-async function refreshUser(){
-  const {data,error} = await db.auth.getUser();
-
-  if(error || !data.user){
-    currentUser=null;
-    currentProfile=null;
-    updateAccountUI();
-    return;
-  }
-
-  currentUser=data.user;
-
-  const {data:profile} = await db
-    .from("profiles")
-    .select("*")
-    .eq("id",currentUser.id)
-    .maybeSingle();
-
-  currentProfile=profile;
-
-  updateAccountUI();
-}
-
-function updateAccountUI(){
-  const name=document.getElementById("accountName");
-  const button=document.getElementById("accountButton");
-
-  if(currentUser){
-    name.textContent=currentProfile?.username || currentUser.email;
-    button.textContent="Logout";
-    button.onclick=logout;
-  }else{
-    name.textContent="Guest";
-    button.textContent="Login";
-    button.onclick=openAuth;
-  }
-}
-
-function openAuth(){
-  document.getElementById("authModal").classList.add("open");
-}
-
-function closeAuth(){
-  document.getElementById("authModal").classList.remove("open");
-  document.getElementById("authError").textContent="";
-}
-
-function toggleAuthMode(){
-  authMode=authMode==="login"?"register":"login";
-
-  document.getElementById("authTitle").textContent =
-    authMode==="login"
-    ? "Login to METGAMES"
-    : "Create your METGAMES account";
-
-  document.getElementById("registerFields").style.display =
-    authMode==="register" ? "block":"none";
-
-  document.getElementById("authSubmit").textContent =
-    authMode==="login" ? "Login":"Create account";
-
-  document.getElementById("switchText").textContent =
-    authMode==="login" ? "New to METGAMES?":"Already have an account?";
-
-  document.getElementById("switchButton").textContent =
-    authMode==="login" ? "Create account":"Login";
-}
-
-document.getElementById("authForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-
-  const email=document.getElementById("email").value.trim();
-  const password=document.getElementById("password").value;
-  const errorBox=document.getElementById("authError");
-
-  errorBox.textContent="";
-
-  try{
-    if(authMode==="login"){
-      const {error}=await db.auth.signInWithPassword({
-        email,
-        password
-      });
-
-      if(error) throw error;
-
-      await refreshUser();
-      closeAuth();
-      navigate("profile");
-    }else{
-      const username=document.getElementById("username").value.trim();
-      const displayName=document.getElementById("displayName").value.trim();
-      const ageCategory=document.getElementById("ageCategory").value;
-
-      if(!username){
-        throw new Error("Username is required.");
-      }
-
-      const {data,error}=await db.auth.signUp({
-        email,
-        password,
-        options:{
-          data:{
-            username,
-            display_name:displayName,
-            age_category:ageCategory
-          }
-        }
-      });
-
-      if(error) throw error;
-
-      if(data.session){
-        await refreshUser();
-        closeAuth();
-        navigate("profile");
-      }else{
-        errorBox.textContent=
-          "Account created. Check your email if email confirmation is enabled.";
-      }
-    }
-  }catch(err){
-    errorBox.textContent=err.message || "Authentication failed.";
+const db =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY,
+{
+  auth:{
+    persistSession:false,
+    autoRefreshToken:false,
+    detectSessionInUrl:true
   }
 });
 
-async function logout(){
-  await db.auth.signOut();
-  currentUser=null;
-  currentProfile=null;
-  updateAccountUI();
-  navigate("home");
+
+/* ==========================================
+   GLOBAL STATE
+=========================================== */
+
+let session = null;
+
+let profile = null;
+
+let games = [];
+
+let route =
+location.hash.slice(1) || "home";
+
+let runtime = null;
+
+
+/* ==========================================
+   FALLBACK METXON GAMES
+=========================================== */
+
+const demoGames = [
+
+{
+  id:"demo1",
+  title:"METXON Coin Dash",
+  description:
+  "A quick arcade game: move, jump and collect glowing coins.",
+  game_type:"2d",
+  maturity_rating:"all",
+  demo:true,
+  emoji:"🪙",
+  publisher:"METXON"
+},
+
+{
+  id:"demo2",
+  title:"METXON Sky Jump",
+  description:
+  "Jump across floating platforms and keep your character moving.",
+  game_type:"2d",
+  maturity_rating:"all",
+  demo:true,
+  emoji:"☁️",
+  publisher:"METXON"
+},
+
+{
+  id:"demo3",
+  title:"METXON Block Breaker",
+  description:
+  "A simple reflex game where the ball breaks blocks.",
+  game_type:"2d",
+  maturity_rating:"all",
+  demo:true,
+  emoji:"🧱",
+  publisher:"METXON"
 }
 
-/* ============================================================
-   NAVIGATION
-   ============================================================ */
+];
 
-async function navigate(page, options={}){
-  if(page==="create" && !currentUser){
-    openAuth();
-    return;
-  }
 
-  if(page==="profile" && !currentUser){
-    openAuth();
-    return;
-  }
+/* ==========================================
+   HELPERS
+=========================================== */
 
-  await transition();
+function esc(value){
 
-  currentPage=page;
+  return String(value ?? "")
+  .replace(/[&<>"']/g,function(c){
 
-  document.querySelectorAll("[data-nav]").forEach(btn=>{
-    btn.classList.toggle("active",btn.dataset.nav===page);
+    return {
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[c];
+
   });
 
-  if(page==="home") await renderHome();
-  if(page==="play") await renderPlay();
-  if(page==="trailers") await renderTrailers();
-  if(page==="create") await renderCreate();
-  if(page==="profile") await renderProfile();
-  if(page==="game") await renderGame(options.gameId);
 }
 
-/* ============================================================
-   HOME
-   ============================================================ */
 
-async function renderHome(){
-  const app=document.getElementById("app");
+function closeM(id){
 
-  app.innerHTML=`
-    <section class="hero">
+  document
+  .getElementById(id)
+  .classList
+  .remove("show");
+
+}
+
+
+function wait(ms){
+
+  return new Promise(
+    resolve => setTimeout(resolve,ms)
+  );
+
+}
+
+
+/* ==========================================
+   MET → XON PAGE TRANSITION
+=========================================== */
+
+async function transitionTo(to){
+
+  const transition =
+  document.getElementById("transition");
+
+  const word =
+  document.getElementById("tword");
+
+  transition.classList.add("show");
+
+  word.className = "met";
+
+  word.textContent = "MET";
+
+  await wait(220);
+
+  word.className = "xon";
+
+  word.textContent = "XON";
+
+  await wait(300);
+
+  location.hash = to;
+
+  route = to;
+
+  render();
+
+  await wait(160);
+
+  transition.classList.remove("show");
+
+}
+
+
+function go(to){
+
+  if(route === to){
+
+    render();
+
+    return;
+
+  }
+
+  transitionTo(to);
+
+}
+
+
+/* ==========================================
+   ACCOUNT UI
+=========================================== */
+
+function updateAccount(){
+
+  const box =
+  document.getElementById("account");
+
+  if(session){
+
+    box.innerHTML = `
+
+      <span class="pill">
+        @${esc(profile?.username || "player")}
+      </span>
+
+      <button
+      class="secondary"
+      onclick="logout()"
+      >
+      Log out
+      </button>
+
+    `;
+
+  }else{
+
+    box.innerHTML = `
+
+      <button
+      class="secondary"
+      onclick="authOpen('login')"
+      >
+      Log in
+      </button>
+
+      <button
+      class="primary"
+      onclick="authOpen('register')"
+      >
+      Join
+      </button>
+
+    `;
+
+  }
+
+}
+
+
+/* ==========================================
+   AUTH
+=========================================== */
+
+function authOpen(mode){
+
+  document.getElementById("authBox").innerHTML = `
+
+    <div class="eyebrow">
+      METGAMES ACCOUNT
+    </div>
+
+    <h2>
+      ${mode === "login"
+        ? "Welcome back"
+        : "Join MetGames"}
+    </h2>
+
+    <p class="muted">
+      ${mode === "login"
+        ? "Log in to play and create."
+        : "Create an account to play and build."}
+    </p>
+
+    <form
+    class="form"
+    onsubmit="${mode === "login"
+      ? "login(event)"
+      : "register(event)"}"
+    >
+
+      ${
+        mode === "register"
+        ?
+        `
+
+        <div class="row">
+
+          <div>
+
+            <label>
+              Display name
+            </label>
+
+            <input
+            name="display"
+            required
+            >
+
+          </div>
+
+          <div>
+
+            <label>
+              Username
+            </label>
+
+            <input
+            name="username"
+            required
+            >
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Age category
+          </label>
+
+          <select
+          name="age"
+          required
+          >
+
+            <option value="">
+              Select
+            </option>
+
+            <option>
+              13–15
+            </option>
+
+            <option>
+              16–17
+            </option>
+
+            <option>
+              18+
+            </option>
+
+          </select>
+
+        </div>
+
+        `
+        :
+        ""
+      }
+
+
       <div>
-        <div class="tag" style="display:inline-block;margin-bottom:18px">
-          A METXON PRODUCT
-        </div>
 
-        <h1>
-          PLAY.<br>
-          CREATE.<br>
-          <span class="gradient">SHARE.</span>
-        </h1>
+        <label>
+          Email
+        </label>
 
-        <p>
-          METGAMES is a creator-first gaming platform where players
-          discover games and creators build their own worlds.
-        </p>
+        <input
+        name="email"
+        type="email"
+        required
+        >
 
-        <div class="hero-actions">
-          <button class="btn primary" onclick="navigate('play')">
-            Explore Games
-          </button>
-
-          <button class="btn" onclick="navigate('create')">
-            Create a Game
-          </button>
-        </div>
       </div>
 
-      <div class="hero-card">
-        <h3>METGAMES</h3>
-        <p>
-          Build your own games, publish them to the platform,
-          and let players around the world discover and play them.
-        </p>
 
-        <div class="meta">
-          <span class="tag">2D Creator</span>
-          <span class="tag">3D Creator — Coming Next</span>
-          <span class="tag">Cloud Projects</span>
-          <span class="tag">Creator Profiles</span>
-        </div>
+      <div>
+
+        <label>
+          Password
+        </label>
+
+        <input
+        name="password"
+        type="password"
+        minlength="6"
+        required
+        >
+
       </div>
-    </section>
 
-    <div class="section-title">
-      <h2>Featured Games</h2>
-      <span>Publicly available games</span>
-    </div>
 
-    <div id="featuredGames" class="grid">
-      <div class="empty">Loading games...</div>
-    </div>
+      <button
+      class="primary"
+      type="submit"
+      >
+
+      ${
+        mode === "login"
+        ? "Log in"
+        : "Create account"
+      }
+
+      </button>
+
+    </form>
+
+
+    <p class="muted">
+
+      ${
+        mode === "login"
+        ? "New here?"
+        : "Already have an account?"
+      }
+
+      <button
+      class="secondary"
+      onclick="authOpen('${
+        mode === "login"
+        ? "register"
+        : "login"
+      }')"
+      >
+
+      ${
+        mode === "login"
+        ? "Join"
+        : "Log in"
+      }
+
+      </button>
+
+    </p>
+
   `;
 
-  await loadGameCards("featuredGames",6);
+  document
+  .getElementById("auth")
+  .classList
+  .add("show");
+
 }
 
-/* ============================================================
-   GAME DISCOVERY
-   ============================================================ */
 
-async function loadGameCards(elementId,limit=20){
-  const el=document.getElementById(elementId);
-  if(!el)return;
+async function login(event){
 
-  const {data,error}=await db
-    .from("games")
-    .select(`
-      id,
-      title,
-      description,
-      game_type,
-      maturity_rating,
-      published_at,
-      owner_id
-    `)
-    .eq("status","published")
-    .order("published_at",{ascending:false})
-    .limit(limit);
+  event.preventDefault();
 
-  if(error){
-    el.innerHTML=`<div class="empty">${escapeHtml(error.message)}</div>`;
-    return;
-  }
+  const form =
+  new FormData(event.target);
 
-  if(!data.length){
-    el.innerHTML=`
-      <div class="empty">
-        No published games yet.<br>
-        Create the first METGAME.
-      </div>
-    `;
-    return;
-  }
+  const result =
+  await db.auth.signInWithPassword({
 
-  const ownerIds=[...new Set(data.map(g=>g.owner_id))];
+    email:form.get("email"),
 
-  const {data:profiles}=await db
-    .from("profiles")
-    .select("id,username")
-    .in("id",ownerIds);
+    password:form.get("password")
 
-  const profileMap={};
-
-  (profiles||[]).forEach(p=>{
-    profileMap[p.id]=p;
   });
 
-  el.innerHTML=data.map(g=>`
-    <article class="card">
-      <div class="thumbnail">
-        ${g.game_type==="3d" ? "3D":"2D"}
+
+  if(result.error){
+
+    alert(result.error.message);
+
+    return;
+
+  }
+
+
+  session =
+  result.data.session;
+
+  await loadProfile();
+
+  updateAccount();
+
+  closeM("auth");
+
+  render();
+
+}
+
+
+async function register(event){
+
+  event.preventDefault();
+
+  const form =
+  new FormData(event.target);
+
+  const result =
+  await db.auth.signUp({
+
+    email:form.get("email"),
+
+    password:form.get("password"),
+
+    options:{
+      data:{
+        display_name:
+        form.get("display"),
+
+        username:
+        form.get("username"),
+
+        age_category:
+        form.get("age")
+      }
+    }
+
+  });
+
+
+  if(result.error){
+
+    alert(result.error.message);
+
+    return;
+
+  }
+
+
+  if(result.data.session){
+
+    session =
+    result.data.session;
+
+    await loadProfile();
+
+  }else{
+
+    alert(
+      "Account created. Please check your email if confirmation is required."
+    );
+
+  }
+
+
+  updateAccount();
+
+  closeM("auth");
+
+  render();
+
+}
+
+
+async function logout(){
+
+  await db.auth.signOut();
+
+  session = null;
+
+  profile = null;
+
+  updateAccount();
+
+  go("home");
+
+}
+
+
+/* ==========================================
+   PROFILE
+=========================================== */
+
+async function loadProfile(){
+
+  if(!session){
+
+    return;
+
+  }
+
+  const result =
+  await db
+  .from("profiles")
+  .select("*")
+  .eq("id",session.user.id)
+  .maybeSingle();
+
+
+  profile =
+  result.data ||
+  {
+    username:
+    session.user.email.split("@")[0]
+  };
+
+}
+
+
+/* ==========================================
+   LOAD GAMES
+=========================================== */
+
+async function loadGames(){
+
+  const result =
+  await db
+  .from("games")
+  .select("*")
+  .eq("status","published")
+  .order(
+    "published_at",
+    {
+      ascending:false
+    }
+  )
+  .limit(60);
+
+
+  if(result.data && result.data.length){
+
+    games = result.data;
+
+  }else{
+
+    games = demoGames;
+
+  }
+
+}
+
+
+/* ==========================================
+   GAME CARD
+=========================================== */
+
+function gameCard(game){
+
+  const isMetxon =
+  game.demo ||
+  game.publisher === "METXON";
+
+
+  return `
+
+  <article class="card">
+
+    <div class="thumb">
+
+      ${game.emoji || "🎮"}
+
+    </div>
+
+
+    <div class="body">
+
+      <h3>
+        ${esc(game.title)}
+      </h3>
+
+
+      <div class="muted">
+
+        ${
+          isMetxon
+          ? "Created by METXON"
+          : "Created by a MetGames creator"
+        }
+
       </div>
 
-      <div class="card-body">
-        <h3>${escapeHtml(g.title)}</h3>
 
-        <p>
-          ${escapeHtml(g.description||"No description yet.")}
-        </p>
+      <p class="muted">
 
-        <div class="meta">
-          <span class="tag">${g.game_type.toUpperCase()}</span>
-          <span class="tag">${escapeHtml(g.maturity_rating)}</span>
-          <span class="tag">
-            @${escapeHtml(profileMap[g.owner_id]?.username||"creator")}
-          </span>
+        ${esc(game.description || "")}
+
+      </p>
+
+
+      <div class="meta">
+
+        <span class="tag">
+
+          ${esc(
+            (game.game_type || "2d")
+            .toUpperCase()
+          )}
+
+        </span>
+
+
+        <span class="tag">
+
+          ${esc(
+            game.maturity_rating || "all"
+          )}
+
+        </span>
+
+      </div>
+
+
+      ${
+        isMetxon
+        ?
+        `
+
+        <div class="details">
+
+          <div class="detail">
+
+            <b>
+              Original company
+            </b>
+
+            METXON
+
+          </div>
+
+
+          <div class="detail">
+
+            <b>
+              Age group
+            </b>
+
+            All ages
+
+          </div>
+
+
+          <div class="detail">
+
+            <b>
+              Chat
+            </b>
+
+            Not available with METXON
+
+          </div>
+
+
+          <div class="detail">
+
+            <b>
+              Requirements
+            </b>
+
+            Keyboard controls · Login to play
+
+          </div>
+
         </div>
+
+        `
+        :
+        ""
+      }
+
+
+      <div class="actions">
 
         <button
-          class="btn primary"
-          style="width:100%;margin-top:14px"
-          onclick="navigate('game',{gameId:'${g.id}'})"
+        class="primary"
+        onclick="openGame('${esc(game.id)}')"
         >
-          View Game
-        </button>
-      </div>
-    </article>
-  `).join("");
-}
 
-async function renderPlay(){
-  const app=document.getElementById("app");
+          View game
 
-  app.innerHTML=`
-    <div class="section-title">
-      <h2>Play</h2>
-      <span>Discover published METGAMES</span>
-    </div>
-
-    <div class="grid" id="playGames">
-      <div class="empty">Loading...</div>
-    </div>
-  `;
-
-  await loadGameCards("playGames",50);
-}
-
-/* ============================================================
-   TRAILERS
-   ============================================================ */
-
-async function renderTrailers(){
-  const app=document.getElementById("app");
-
-  const {data,error}=await db
-    .from("trailers")
-    .select(`
-      id,
-      game_id,
-      storage_path,
-      duration_seconds,
-      games (
-        title,
-        description,
-        status,
-        owner_id
-      )
-    `)
-    .eq("status","published")
-    .limit(30);
-
-  if(error){
-    app.innerHTML=`
-      <div class="empty">
-        ${escapeHtml(error.message)}
-      </div>
-    `;
-    return;
-  }
-
-  if(!data.length){
-    app.innerHTML=`
-      <div class="section-title">
-        <h2>Watch Trailers</h2>
-      </div>
-
-      <div class="empty">
-        No published trailers yet.
-        Creators will be able to add promotional trailers as
-        the Studio tools expand.
-      </div>
-    `;
-    return;
-  }
-
-  app.innerHTML=`
-    <div class="section-title">
-      <h2>Watch Trailers</h2>
-      <span>Public trailer gallery</span>
-    </div>
-
-    <div class="grid">
-      ${data.map(t=>`
-        <article class="card">
-          <div class="thumbnail">▶</div>
-          <div class="card-body">
-            <h3>${escapeHtml(t.games?.title||"Game")}</h3>
-            <p>${escapeHtml(t.games?.description||"")}</p>
-            <button class="btn primary"
-              onclick="navigate('game',{gameId:'${t.game_id}'})">
-              View Game
-            </button>
-          </div>
-        </article>
-      `).join("")}
-    </div>
-  `;
-}
-
-/* ============================================================
-   CREATE
-   ============================================================ */
-
-async function renderCreate(){
-  if(!currentUser){
-    openAuth();
-    return;
-  }
-
-  const app=document.getElementById("app");
-
-  app.innerHTML=`
-    <div class="section-title">
-      <h2>Creator</h2>
-      <span>Build your own METGAME</span>
-    </div>
-
-    <div class="creator-actions">
-      <button class="btn primary" onclick="newGame()">+ New Game</button>
-      <button class="btn" onclick="loadMyGames()">My Games</button>
-    </div>
-
-    <div id="creatorContent">
-      <div class="empty">
-        Choose <b>New Game</b> to start creating,
-        or open one of your existing projects.
-      </div>
-    </div>
-  `;
-
-  await loadMyGames();
-}
-
-async function loadMyGames(){
-  const el=document.getElementById("creatorContent");
-  if(!el)return;
-
-  const {data,error}=await db
-    .from("games")
-    .select("*")
-    .eq("owner_id",currentUser.id)
-    .order("updated_at",{ascending:false});
-
-  if(error){
-    el.innerHTML=`<div class="empty">${escapeHtml(error.message)}</div>`;
-    return;
-  }
-
-  el.innerHTML=`
-    <div class="section-title">
-      <h2>My Games</h2>
-      <span>${data.length} project(s)</span>
-    </div>
-
-    <div class="grid">
-      ${data.length ? data.map(g=>`
-        <article class="card">
-          <div class="thumbnail">
-            ${g.game_type.toUpperCase()}
-          </div>
-
-          <div class="card-body">
-            <h3>${escapeHtml(g.title)}</h3>
-
-            <p>
-              ${escapeHtml(g.description||"No description")}
-            </p>
-
-            <div class="meta">
-              <span class="tag">${escapeHtml(g.status)}</span>
-              <span class="tag">${escapeHtml(g.maturity_rating)}</span>
-            </div>
-
-            <button class="btn primary"
-              style="width:100%;margin-top:12px"
-              onclick="openCreator('${g.id}')">
-              Open Creator
-            </button>
-          </div>
-        </article>
-      `).join("") : `
-        <div class="empty">
-          You have no games yet.
-        </div>
-      `}
-    </div>
-  `;
-}
-
-async function newGame(){
-  if(!currentUser){
-    openAuth();
-    return;
-  }
-
-  const title=prompt("Game title:");
-
-  if(!title)return;
-
-  const description=prompt("Game description:")||"";
-
-  const gameType=prompt(
-    "Game type: type 2d or 3d",
-    "2d"
-  )?.toLowerCase();
-
-  if(!["2d","3d"].includes(gameType)){
-    alert("This prototype accepts 2d or 3d.");
-    return;
-  }
-
-  const maturity=prompt(
-    "Maturity rating: all, 7+, 12+, 13+, 16+, 18+",
-    "all"
-  )||"all";
-
-  const {data,error}=await db.rpc("create_game",{
-    p_title:title,
-    p_description:description,
-    p_game_type:gameType,
-    p_maturity_rating:maturity
-  });
-
-  if(error){
-    if(error.message.includes("WEEKLY_GAME_LIMIT")){
-      alert("Free Creator limit reached: 5 games this week.");
-    }else{
-      alert(error.message);
-    }
-    return;
-  }
-
-  const game=Array.isArray(data)?data[0]:data;
-
-  await openCreator(game.id);
-}
-
-/* ============================================================
-   CREATOR EDITOR
-   ============================================================ */
-
-async function openCreator(gameId){
-  const {data:game,error}=await db
-    .from("games")
-    .select("*")
-    .eq("id",gameId)
-    .eq("owner_id",currentUser.id)
-    .single();
-
-  if(error){
-    alert(error.message);
-    return;
-  }
-
-  const {data:versions}=await db
-    .from("game_versions")
-    .select("*")
-    .eq("game_id",gameId)
-    .eq("status","draft")
-    .order("version_number",{ascending:false})
-    .limit(1);
-
-  const version=versions?.[0];
-
-  editor.game=game;
-  editor.version=version||null;
-  editor.objects=version?.asset_manifest?.objects || defaultScene();
-  editor.selected=null;
-  editor.dirty=false;
-  editor.testMode=false;
-
-  renderEditor();
-}
-
-function defaultScene(){
-  return [
-    {
-      id:crypto.randomUUID(),
-      type:"player",
-      x:100,
-      y:300,
-      width:40,
-      height:40,
-      color:"#35a8ff"
-    },
-    {
-      id:crypto.randomUUID(),
-      type:"platform",
-      x:60,
-      y:390,
-      width:500,
-      height:35,
-      color:"#4d5d7a"
-    },
-    {
-      id:crypto.randomUUID(),
-      type:"coin",
-      x:300,
-      y:330,
-      width:25,
-      height:25,
-      color:"#ffd34e"
-    }
-  ];
-}
-
-function renderEditor(){
-  const el=document.getElementById("creatorContent");
-
-  if(!el)return;
-
-  el.innerHTML=`
-    <div class="creator-actions">
-      <button class="btn" onclick="loadMyGames()">← My Games</button>
-      <button class="btn" onclick="saveProject()">Save</button>
-      <button class="btn green" onclick="toggleTestMode()">Test Game</button>
-      <button class="btn primary" onclick="publishCurrentGame()">Publish</button>
-    </div>
-
-    <div class="creator-layout">
-
-      <aside class="creator-panel">
-        <h3>Objects</h3>
-
-        <button class="btn tool" onclick="addObject('player')">
-          + Player
         </button>
 
-        <button class="btn tool" onclick="addObject('platform')">
-          + Platform
+
+        <button
+        class="secondary"
+        onclick="go('create')"
+        >
+
+          Create your own
+
         </button>
 
-        <button class="btn tool" onclick="addObject('enemy')">
-          + Enemy
-        </button>
-
-        <button class="btn tool" onclick="addObject('coin')">
-          + Coin
-        </button>
-
-        <button class="btn tool" onclick="addObject('text')">
-          + Text
-        </button>
-
-        <hr style="border-color:#243047">
-
-        <div class="status">
-          ${escapeHtml(editor.game.title)}
-        </div>
-
-        <div class="status" style="margin-top:5px">
-          ${editor.game.game_type.toUpperCase()}
-        </div>
-
-        <div class="status" style="margin-top:5px">
-          Status: ${escapeHtml(editor.game.status)}
-        </div>
-      </aside>
-
-      <section class="canvas-wrap">
-        <canvas id="gameCanvas" width="900" height="500"></canvas>
-
-        <div class="status" style="margin-top:10px">
-          Click an object to select it. Drag objects to move them.
-        </div>
-      </section>
-
-      <aside class="creator-panel">
-        <h3>Properties</h3>
-
-        <div id="properties">
-          <div class="status">
-            Select an object.
-          </div>
-        </div>
-
-        <hr style="border-color:#243047">
-
-        <h3>Scene</h3>
-
-        <div id="objectList" class="object-list"></div>
-      </aside>
+      </div>
 
     </div>
+
+  </article>
+
   `;
 
-  drawEditor();
-  bindCanvas();
-  renderObjectList();
 }
 
-function drawEditor(){
-  const canvas=document.getElementById("gameCanvas");
-  if(!canvas)return;
 
-  const ctx=canvas.getContext("2d");
+/* ==========================================
+   HOME
+=========================================== */
 
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+function homePage(){
 
-  ctx.fillStyle="#101724";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+  document.getElementById("app").innerHTML = `
 
-  editor.objects.forEach(o=>{
-    ctx.fillStyle=o.color||"#ffffff";
+  <div class="shell">
 
-    if(o.type==="coin"){
-      ctx.beginPath();
-      ctx.arc(
-        o.x+o.width/2,
-        o.y+o.height/2,
-        Math.min(o.width,o.height)/2,
-        0,
-        Math.PI*2
-      );
-      ctx.fill();
-    }else{
-      ctx.fillRect(o.x,o.y,o.width,o.height);
-    }
 
-    if(o.type==="text"){
-      ctx.fillStyle=o.color||"#fff";
-      ctx.font="22px Arial";
-      ctx.fillText(o.text||"METGAME",o.x,o.y+25);
-    }
-
-    if(editor.selected===o.id){
-      ctx.strokeStyle="#ffffff";
-      ctx.lineWidth=2;
-      ctx.strokeRect(o.x-3,o.y-3,o.width+6,o.height+6);
-    }
-  });
-}
-
-function bindCanvas(){
-  const canvas=document.getElementById("gameCanvas");
-  if(!canvas)return;
-
-  let dragging=false;
-  let offsetX=0;
-  let offsetY=0;
-
-  canvas.onpointerdown=e=>{
-    const rect=canvas.getBoundingClientRect();
-
-    const x=(e.clientX-rect.left)*(canvas.width/rect.width);
-    const y=(e.clientY-rect.top)*(canvas.height/rect.height);
-
-    const hit=[...editor.objects]
-      .reverse()
-      .find(o=>x>=o.x&&x<=o.x+o.width&&y>=o.y&&y<=o.y+o.height);
-
-    if(!hit)return;
-
-    editor.selected=hit.id;
-    dragging=true;
-
-    offsetX=x-hit.x;
-    offsetY=y-hit.y;
-
-    renderObjectList();
-    renderProperties();
-    drawEditor();
-  };
-
-  canvas.onpointermove=e=>{
-    if(!dragging || editor.testMode)return;
-
-    const o=editor.objects.find(x=>x.id===editor.selected);
-    if(!o)return;
-
-    const rect=canvas.getBoundingClientRect();
-
-    const x=(e.clientX-rect.left)*(canvas.width/rect.width);
-    const y=(e.clientY-rect.top)*(canvas.height/rect.height);
-
-    o.x=Math.max(0,Math.min(canvas.width-o.width,x-offsetX));
-    o.y=Math.max(0,Math.min(canvas.height-o.height,y-offsetY));
-
-    editor.dirty=true;
-    drawEditor();
-    renderProperties();
-  };
-
-  canvas.onpointerup=()=>dragging=false;
-  canvas.onpointercancel=()=>dragging=false;
-}
-
-function addObject(type){
-  const defaults={
-    player:{width:40,height:40,color:"#35a8ff"},
-    platform:{width:140,height:30,color:"#536481"},
-    enemy:{width:40,height:40,color:"#ff4167"},
-    coin:{width:25,height:25,color:"#ffd34e"},
-    text:{width:150,height:30,color:"#ffffff",text:"METGAMES"}
-  };
-
-  const d=defaults[type];
-
-  const o={
-    id:crypto.randomUUID(),
-    type,
-    x:100+Math.random()*300,
-    y:100+Math.random()*200,
-    ...d
-  };
-
-  editor.objects.push(o);
-  editor.selected=o.id;
-  editor.dirty=true;
-
-  renderEditor();
-}
-
-function renderObjectList(){
-  const el=document.getElementById("objectList");
-  if(!el)return;
-
-  el.innerHTML=editor.objects.map((o,i)=>`
-    <div
-      class="object-row ${editor.selected===o.id?"selected":""}"
-      onclick="selectObject('${o.id}')"
-    >
-      <span>${i+1}. ${escapeHtml(o.type)}</span>
-      <button
-        class="btn danger"
-        style="padding:3px 7px"
-        onclick="event.stopPropagation();deleteObject('${o.id}')"
-      >
-        ×
-      </button>
-    </div>
-  `).join("");
-}
-
-function selectObject(id){
-  editor.selected=id;
-  renderObjectList();
-  renderProperties();
-  drawEditor();
-}
-
-function deleteObject(id){
-  editor.objects=editor.objects.filter(o=>o.id!==id);
-
-  if(editor.selected===id){
-    editor.selected=null;
-  }
-
-  editor.dirty=true;
-
-  renderObjectList();
-  renderProperties();
-  drawEditor();
-}
-
-function renderProperties(){
-  const el=document.getElementById("properties");
-  if(!el)return;
-
-  const o=editor.objects.find(x=>x.id===editor.selected);
-
-  if(!o){
-    el.innerHTML=`<div class="status">Select an object.</div>`;
-    return;
-  }
-
-  el.innerHTML=`
-    <div class="form">
+    <section class="hero">
 
       <div>
-        <label>Type</label>
-        <input value="${escapeAttr(o.type)}" disabled>
-      </div>
 
-      <div>
-        <label>X</label>
-        <input type="number" value="${o.x}"
-          onchange="changeObject('x',this.value)">
-      </div>
+        <div class="eyebrow">
 
-      <div>
-        <label>Y</label>
-        <input type="number" value="${o.y}"
-          onchange="changeObject('y',this.value)">
-      </div>
+          A METXON PRODUCT · GAME PLATFORM
 
-      <div>
-        <label>Width</label>
-        <input type="number" value="${o.width}"
-          onchange="changeObject('width',this.value)">
-      </div>
-
-      <div>
-        <label>Height</label>
-        <input type="number" value="${o.height}"
-          onchange="changeObject('height',this.value)">
-      </div>
-
-      <div>
-        <label>Color</label>
-        <input type="text" value="${escapeAttr(o.color||"#ffffff")}"
-          onchange="changeObject('color',this.value)">
-      </div>
-
-      ${o.type==="text"?`
-        <div>
-          <label>Text</label>
-          <input value="${escapeAttr(o.text||"")}"
-            onchange="changeObject('text',this.value)">
-        </div>
-      `:""}
-
-    </div>
-  `;
-}
-
-function changeObject(property,value){
-  const o=editor.objects.find(x=>x.id===editor.selected);
-  if(!o)return;
-
-  if(["x","y","width","height"].includes(property)){
-    o[property]=Number(value);
-  }else{
-    o[property]=value;
-  }
-
-  editor.dirty=true;
-  drawEditor();
-}
-
-/* ============================================================
-   SAVE
-   ============================================================ */
-
-async function saveProject(){
-  if(!currentUser || !editor.game)return;
-
-  const manifest={
-    engine:"metgames-2d-mvp",
-    schema:1,
-    objects:editor.objects
-  };
-
-  let versionId=editor.version?.id;
-
-  if(versionId){
-    const {error}=await db
-      .from("game_versions")
-      .update({
-        asset_manifest:manifest
-      })
-      .eq("id",versionId)
-      .eq("game_id",editor.game.id);
-
-    if(error){
-      alert(error.message);
-      return;
-    }
-  }else{
-    const {data:versions}=await db
-      .from("game_versions")
-      .select("version_number")
-      .eq("game_id",editor.game.id)
-      .order("version_number",{ascending:false})
-      .limit(1);
-
-    const next=(versions?.[0]?.version_number||0)+1;
-
-    const {data,error}=await db
-      .from("game_versions")
-      .insert({
-        game_id:editor.game.id,
-        version_number:next,
-        status:"draft",
-        asset_manifest:manifest,
-        created_by:currentUser.id
-      })
-      .select()
-      .single();
-
-    if(error){
-      alert(error.message);
-      return;
-    }
-
-    editor.version=data;
-  }
-
-  await db
-    .from("games")
-    .update({
-      updated_at:new Date().toISOString()
-    })
-    .eq("id",editor.game.id)
-    .eq("owner_id",currentUser.id);
-
-  editor.dirty=false;
-
-  alert("Project saved to Supabase.");
-}
-
-/* ============================================================
-   PUBLISH
-   ============================================================ */
-
-async function publishCurrentGame(){
-  if(!currentUser || !editor.game)return;
-
-  if(editor.game.game_type==="3d"){
-    alert(
-      "The 3D Creator is reserved for the next engine stage. " +
-      "This MVP currently publishes the 2D browser runtime."
-    );
-    return;
-  }
-
-  await saveProject();
-
-  const manifest={
-    engine:"metgames-2d-mvp",
-    schema:1,
-    objects:editor.objects
-  };
-
-  const {data,error}=await db.rpc("publish_game",{
-    p_game_id:editor.game.id,
-    p_manifest:manifest
-  });
-
-  if(error){
-    alert(error.message);
-    return;
-  }
-
-  editor.game.status="published";
-  editor.game.published_at=new Date().toISOString();
-
-  const published=Array.isArray(data)?data[0]:data;
-
-  editor.version=published;
-
-  alert(
-    "Published successfully!\n\n" +
-    "Your game is now publicly visible on METGAMES."
-  );
-
-  renderEditor();
-}
-
-/* ============================================================
-   TEST GAME
-   ============================================================ */
-
-function toggleTestMode(){
-  editor.testMode=!editor.testMode;
-
-  const button=document.querySelector(".creator-actions .btn.green");
-
-  if(button){
-    button.textContent=editor.testMode
-      ?"Stop Test"
-      :"Test Game";
-  }
-
-  if(editor.testMode){
-    runEditorGame();
-  }
-}
-
-function runEditorGame(){
-  if(!editor.testMode)return;
-
-  const canvas=document.getElementById("gameCanvas");
-  if(!canvas)return;
-
-  const player=editor.objects.find(o=>o.type==="player");
-
-  if(!player)return;
-
-  player.x+=1.5;
-
-  if(player.x>canvas.width){
-    player.x=-player.width;
-  }
-
-  drawEditor();
-
-  requestAnimationFrame(runEditorGame);
-}
-
-/* ============================================================
-   PUBLIC GAME PAGE
-   ============================================================ */
-
-async function renderGame(gameId){
-  const app=document.getElementById("app");
-
-  const {data:game,error}=await db
-    .from("games")
-    .select(`
-      id,
-      title,
-      description,
-      game_type,
-      maturity_rating,
-      owner_id,
-      published_at
-    `)
-    .eq("id",gameId)
-    .eq("status","published")
-    .single();
-
-  if(error){
-    app.innerHTML=`
-      <div class="empty">
-        Game not found or not published.
-      </div>
-    `;
-    return;
-  }
-
-  const {data:version,error:versionError}=await db
-    .from("game_versions")
-    .select("*")
-    .eq("game_id",gameId)
-    .eq("status","published")
-    .order("version_number",{ascending:false})
-    .limit(1)
-    .maybeSingle();
-
-  if(versionError || !version){
-    app.innerHTML=`
-      <div class="empty">
-        Published game build is unavailable.
-      </div>
-    `;
-    return;
-  }
-
-  const {data:creator}=await db
-    .from("profiles")
-    .select("username,display_name,creator_rating,followers_count")
-    .eq("id",game.owner_id)
-    .maybeSingle();
-
-  app.innerHTML=`
-    <div class="player-shell">
-
-      <div class="player-top">
-        <div>
-          <button class="btn" onclick="navigate('play')">
-            ← Back
-          </button>
         </div>
 
-        <div class="status">
-          METGAMES RUNTIME
-        </div>
-      </div>
 
-      <canvas id="playCanvas" width="900" height="506"></canvas>
+        <h1>
 
-      <div class="play-info">
-        <h1>${escapeHtml(game.title)}</h1>
+          Play.<br>
+          Build.<br>
+          Share.
 
-        <p style="color:#909bb0">
-          ${escapeHtml(game.description||"No description")}
+        </h1>
+
+
+        <p class="muted">
+
+          Welcome to MetGames — discover games,
+          watch trailers and create your own worlds.
+
         </p>
 
-        <div class="meta">
-          <span class="tag">${game.game_type.toUpperCase()}</span>
-          <span class="tag">${escapeHtml(game.maturity_rating)}</span>
-          <span class="tag">
-            @${escapeHtml(creator?.username||"creator")}
-          </span>
+
+        <div
+        style="
+        display:flex;
+        gap:9px;
+        flex-wrap:wrap;
+        margin-top:20px;
+        "
+        >
+
+          <button
+          class="primary"
+          onclick="go('play')"
+          >
+
+            Explore Games
+
+          </button>
+
+
+          <button
+          class="secondary"
+          onclick="go('create')"
+          >
+
+            Create a Game
+
+          </button>
+
         </div>
 
-        <div style="margin-top:15px;color:#718099;font-size:12px">
-          FPS: <span id="fpsValue">--</span>
-          &nbsp; | &nbsp;
-          Runtime: METGAMES
-        </div>
-
-        <div class="rating-row">
-          <span>Rate:</span>
-
-          ${[1,2,3,4,5].map(n=>`
-            <button class="star"
-              onclick="rateGame('${game.id}',${n})">
-              ★
-            </button>
-          `).join("")}
-        </div>
       </div>
-    </div>
+
+
+      <div class="heroart">
+
+        <img
+        src="image.png"
+        alt="MetGames"
+        >
+
+      </div>
+
+    </section>
+
+
+    <section class="section">
+
+      <div class="head">
+
+        <div>
+
+          <div class="eyebrow">
+            FIRST GAMES
+          </div>
+
+          <h2>
+            Games from METXON
+          </h2>
+
+          <div class="muted">
+            Starter games for the first MetGames users.
+          </div>
+
+        </div>
+
+
+        <button
+        class="secondary"
+        onclick="go('play')"
+        >
+
+          See all
+
+        </button>
+
+      </div>
+
+
+      <div class="grid">
+
+        ${
+          games
+          .slice(0,3)
+          .map(gameCard)
+          .join("")
+        }
+
+      </div>
+
+    </section>
+
+
+    <section class="section">
+
+      <div class="banner">
+
+        <div class="eyebrow">
+          YOUR TURN
+        </div>
+
+
+        <h2>
+          Create your own game
+        </h2>
+
+
+        <p class="muted">
+
+          Free Creator includes basic tools
+          and up to 5 published games per week.
+
+        </p>
+
+
+        <button
+        class="primary"
+        onclick="go('create')"
+        >
+
+          Open Creator
+
+        </button>
+
+      </div>
+
+    </section>
+
+  </div>
+
   `;
 
-  if(!currentUser){
-    const canvas=document.getElementById("playCanvas");
-    const ctx=canvas.getContext("2d");
-
-    ctx.fillStyle="#101724";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    ctx.fillStyle="#ffffff";
-    ctx.font="bold 28px Arial";
-    ctx.textAlign="center";
-    ctx.fillText(
-      "Login required to play",
-      canvas.width/2,
-      canvas.height/2
-    );
-
-    ctx.font="16px Arial";
-    ctx.fillStyle="#8f9ab0";
-    ctx.fillText(
-      "Click Login above to start the game.",
-      canvas.width/2,
-      canvas.height/2+35
-    );
-
-    canvas.onclick=()=>{
-      openAuth();
-    };
-
-    return;
-  }
-
-  const {data:quota,error:quotaError}=await db.rpc(
-    "increment_game_launch",
-    {p_game_id:game.id}
-  );
-
-  if(quotaError){
-    alert(quotaError.message);
-    return;
-  }
-
-  const q=Array.isArray(quota)?quota[0]:quota;
-
-  if(!q?.ok){
-    alert(
-      q?.reason==="LIMIT_EXCEEDED"
-      ? `Daily play limit reached. Limit: ${q.limit_count}.`
-      : `Unable to start game: ${q?.reason||"Unknown"}`
-    );
-    return;
-  }
-
-  startPublishedGame(
-    version.asset_manifest,
-    game
-  );
 }
 
-function startPublishedGame(manifest,game){
-  const canvas=document.getElementById("playCanvas");
-  if(!canvas)return;
 
-  const ctx=canvas.getContext("2d");
+/* ==========================================
+   PLAY PAGE
+=========================================== */
 
-  const objects=(manifest?.objects||[]).map(o=>({...o}));
+function playPage(){
 
-  let player=objects.find(o=>o.type==="player");
+  document.getElementById("app").innerHTML = `
 
-  if(!player){
-    player={
-      type:"player",
-      x:100,
-      y:350,
-      width:40,
-      height:40,
-      color:"#35a8ff"
-    };
+  <div class="shell section">
 
-    objects.push(player);
-  }
+    <div class="eyebrow">
+      PLAY
+    </div>
 
-  let left=false;
-  let right=false;
-  let jump=false;
-  let velocityY=0;
 
-  function keyDown(e){
-    if(e.key==="ArrowLeft"||e.key.toLowerCase()==="a")left=true;
-    if(e.key==="ArrowRight"||e.key.toLowerCase()==="d")right=true;
-    if(e.key==="ArrowUp"||e.key===" ")jump=true;
-  }
+    <h1 style="font-size:52px">
 
-  function keyUp(e){
-    if(e.key==="ArrowLeft"||e.key.toLowerCase()==="a")left=false;
-    if(e.key==="ArrowRight"||e.key.toLowerCase()==="d")right=false;
-    if(e.key==="ArrowUp"||e.key===" ")jump=false;
-  }
+      Discover games
 
-  window.addEventListener("keydown",keyDown);
-  window.addEventListener("keyup",keyUp);
+    </h1>
 
-  let last=performance.now();
-  let frames=0;
-  let fpsStart=performance.now();
 
-  function loop(now){
-    const dt=Math.min(0.033,(now-last)/1000);
-    last=now;
+    <p class="muted">
 
-    frames++;
+      Browsing is public.
+      A login is required to start playing.
 
-    if(now-fpsStart>=1000){
-      document.getElementById("fpsValue").textContent=frames;
-      frames=0;
-      fpsStart=now;
-    }
+    </p>
 
-    if(left)player.x-=240*dt;
-    if(right)player.x+=240*dt;
 
-    velocityY+=1000*dt;
+    <div class="tabs">
 
-    if(jump && player.y>=350){
-      velocityY=-480;
-    }
+      <button class="active">
+        Featured
+      </button>
 
-    player.y+=velocityY*dt;
+      <button>
+        2D
+      </button>
 
-    if(player.y>=350){
-      player.y=350;
-      velocityY=0;
-    }
+      <button>
+        3D
+      </button>
 
-    player.x=Math.max(
-      0,
-      Math.min(canvas.width-player.width,player.x)
-    );
+      <button>
+        New Releases
+      </button>
 
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+      <button>
+        Popular
+      </button>
 
-    ctx.fillStyle="#101724";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+      <button>
+        Following
+      </button>
 
-    objects.forEach(o=>{
-      if(o.id===player.id)return;
+    </div>
 
-      ctx.fillStyle=o.color||"#ffffff";
 
-      if(o.type==="coin"){
-        ctx.beginPath();
-        ctx.arc(
-          o.x+o.width/2,
-          o.y+o.height/2,
-          Math.min(o.width,o.height)/2,
-          0,
-          Math.PI*2
-        );
-        ctx.fill();
-      }else{
-        ctx.fillRect(o.x,o.y,o.width,o.height);
+    <div class="grid">
+
+      ${
+        games
+        .map(gameCard)
+        .join("")
       }
 
-      if(o.type==="text"){
-        ctx.font="22px Arial";
-        ctx.fillText(o.text||"",o.x,o.y+25);
-      }
-    });
+    </div>
 
-    ctx.fillStyle=player.color||"#35a8ff";
+  </div>
+
+  `;
+
+}
+
+
+/* ==========================================
+   TRAILERS
+=========================================== */
+
+async function trailerPage(){
+
+  const result =
+  await db
+  .from("trailers")
+  .select(
+    "id,duration_seconds,status,storage_path,games(title,description,maturity_rating)"
+  )
+  .eq("status","published")
+  .limit(30);
+
+
+  const trailers =
+  result.data || [];
+
+
+  document.getElementById("app").innerHTML = `
+
+  <div class="shell section">
+
+    <div class="eyebrow">
+      WATCH TRAILERS
+    </div>
+
+
+    <h1 style="font-size:52px">
+      Game trailers
+    </h1>
+
+
+    <p class="muted">
+
+      Trailers are public and do not require login.
+
+    </p>
+
+
+    ${
+      trailers.length
+      ?
+      `
+
+      <div class="grid">
+
+        ${
+          trailers
+          .map(trailer => `
+
+            <article class="card">
+
+              <div class="thumb">
+                ▶
+              </div>
+
+              <div class="body">
+
+                <h3>
+                  ${esc(
+                    trailer.games?.title ||
+                    "Game trailer"
+                  )}
+                </h3>
+
+                <p class="muted">
+
+                  ${esc(
+                    trailer.games?.description || ""
+                  )}
+
+                </p>
+
+
+                <button
+                class="primary"
+                onclick="alert('Trailer playback can be connected to Supabase Storage here.')"
+                >
+
+                  Watch
+
+                </button>
+
+              </div>
+
+            </article>
+
+          `)
+          .join("")
+        }
+
+      </div>
+
+      `
+      :
+      `
+
+      <div class="empty">
+
+        No published trailers yet.
+
+      </div>
+
+      `
+    }
+
+  </div>
+
+  `;
+
+}
+
+
+/* ==========================================
+   CREATE PAGE
+=========================================== */
+
+function createPage(){
+
+  if(!session){
+
+    document.getElementById("app").innerHTML = `
+
+    <div class="shell section">
+
+      <div class="banner">
+
+        <div class="eyebrow">
+          CREATE
+        </div>
+
+
+        <h1 style="font-size:52px">
+
+          Build something.
+
+        </h1>
+
+
+        <p class="muted">
+
+          Log in to create and publish games.
+
+        </p>
+
+
+        <button
+        class="primary"
+        onclick="authOpen('login')"
+        >
+
+          Log in to Create
+
+        </button>
+
+      </div>
+
+    </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  document.getElementById("app").innerHTML = `
+
+  <div class="shell section">
+
+    <div class="eyebrow">
+      METGAMES CREATOR
+    </div>
+
+
+    <h1 style="font-size:52px">
+
+      Creator Studio
+
+    </h1>
+
+
+    <div class="grid">
+
+
+      <div class="card">
+
+        <div class="body">
+
+          <h3>
+            Free Creator
+          </h3>
+
+          <p class="muted">
+
+            10 GB · up to 5 games/week ·
+            basic tools · publishing.
+
+          </p>
+
+
+          <button
+          class="primary"
+          onclick="newGame()"
+          >
+
+            Start a game
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="body">
+
+          <h3>
+            MetGames Studio
+          </h3>
+
+          <p class="muted">
+
+            Base ₹500 · Silver ₹2,000 ·
+            Gold ₹5,000.
+
+            Payments are not connected yet.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div
+    class="head"
+    style="margin-top:28px"
+    >
+
+      <h2>
+        My Games
+      </h2>
+
+
+      <button
+      class="secondary"
+      onclick="newGame()"
+      >
+
+        + New game
+
+      </button>
+
+    </div>
+
+
+    <div class="grid">
+
+      ${
+        games
+        .filter(
+          game =>
+          game.owner_id === session.user.id
+        )
+        .map(gameCard)
+        .join("")
+        ||
+        `
+        <div
+        class="empty"
+        style="grid-column:1/-1"
+        >
+
+          No published games yet.
+
+        </div>
+        `
+      }
+
+    </div>
+
+  </div>
+
+  `;
+
+}
+
+
+/* ==========================================
+   NEW GAME
+=========================================== */
+
+function newGame(){
+
+  document.getElementById("modalBox").innerHTML = `
+
+    <div class="eyebrow">
+      NEW GAME
+    </div>
+
+
+    <h2>
+      Create a game
+    </h2>
+
+
+    <form
+    class="form"
+    onsubmit="makeGame(event)"
+    >
+
+      <div>
+
+        <label>
+          Title
+        </label>
+
+        <input
+        name="title"
+        required
+        maxlength="80"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Description
+        </label>
+
+        <textarea
+        name="description"
+        required
+        ></textarea>
+
+      </div>
+
+
+      <div class="row">
+
+        <div>
+
+          <label>
+            Type
+          </label>
+
+          <select name="type">
+
+            <option value="2d">
+              2D
+            </option>
+
+            <option value="3d">
+              3D
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Maturity
+          </label>
+
+          <select name="rating">
+
+            <option>
+              all
+            </option>
+
+            <option>
+              7+
+            </option>
+
+            <option>
+              12+
+            </option>
+
+            <option>
+              13+
+            </option>
+
+            <option>
+              16+
+            </option>
+
+            <option>
+              18+
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <button
+      class="primary"
+      type="submit"
+      >
+
+        Create draft
+
+      </button>
+
+    </form>
+
+  `;
+
+
+  document
+  .getElementById("modal")
+  .classList
+  .add("show");
+
+}
+
+
+async function makeGame(event){
+
+  event.preventDefault();
+
+  const form =
+  new FormData(event.target);
+
+
+  const result =
+  await db.rpc(
+    "create_game",
+    {
+      p_title:
+      form.get("title"),
+
+      p_description:
+      form.get("description"),
+
+      p_game_type:
+      form.get("type"),
+
+      p_maturity_rating:
+      form.get("rating")
+    }
+  );
+
+
+  if(result.error){
+
+    alert(result.error.message);
+
+    return;
+
+  }
+
+
+  closeM("modal");
+
+  await loadGames();
+
+  render();
+
+}
+
+
+/* ==========================================
+   PROFILE PAGE
+=========================================== */
+
+function profilePage(){
+
+  if(!session){
+
+    document.getElementById("app").innerHTML = `
+
+    <div class="shell section">
+
+      <div class="banner">
+
+        <div class="eyebrow">
+          PROFILE
+        </div>
+
+
+        <h1 style="font-size:52px">
+
+          Your MetGames profile
+
+        </h1>
+
+
+        <button
+        class="primary"
+        onclick="authOpen('login')"
+        >
+
+          Log in
+
+        </button>
+
+      </div>
+
+    </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const initial =
+  (
+    profile?.display_name ||
+    profile?.username ||
+    "P"
+  )[0].toUpperCase();
+
+
+  document.getElementById("app").innerHTML = `
+
+  <div class="shell section">
+
+    <div class="profile">
+
+
+      <aside class="card">
+
+        <div class="body">
+
+          <div class="avatar">
+
+            ${esc(initial)}
+
+          </div>
+
+
+          <h2 style="font-size:23px">
+
+            ${esc(
+              profile?.display_name ||
+              "Player"
+            )}
+
+          </h2>
+
+
+          <div class="muted">
+
+            @${esc(
+              profile?.username ||
+              "player"
+            )}
+
+          </div>
+
+
+          <div class="meta">
+
+            <span class="tag">
+
+              Creator rating:
+              ${esc(
+                profile?.creator_rating ||
+                "New"
+              )}
+
+            </span>
+
+
+            <span class="tag">
+
+              ${esc(
+                profile?.age_category ||
+                "Age private"
+              )}
+
+            </span>
+
+          </div>
+
+        </div>
+
+      </aside>
+
+
+      <section>
+
+        <div class="eyebrow">
+          PROFILE
+        </div>
+
+
+        <h1 style="font-size:52px">
+
+          Your MetGames space
+
+        </h1>
+
+
+        <div class="banner">
+
+          <h3>
+            Community
+          </h3>
+
+
+          <p class="muted">
+
+            Chat is intended only for eligible
+            13+ accounts and should pass
+            moderation before delivery.
+
+            METXON starter games do not provide
+            chat with METXON.
+
+          </p>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </div>
+
+  `;
+
+}
+
+
+/* ==========================================
+   OPEN GAME
+=========================================== */
+
+function openGame(id){
+
+  location.hash =
+  "game/" + id;
+
+  route =
+  "game/" + id;
+
+  render();
+
+}
+
+
+/* ==========================================
+   GAME PAGE
+=========================================== */
+
+function gamePage(id){
+
+  const game =
+  [...games,...demoGames]
+  .find(
+    item => item.id === id
+  );
+
+
+  if(!game){
+
+    document.getElementById("app").innerHTML = `
+
+      <div class="shell section">
+
+        <div class="empty">
+
+          Game not found.
+
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const isMetxon =
+  game.demo ||
+  game.publisher === "METXON";
+
+
+  document.getElementById("app").innerHTML = `
+
+  <div class="shell section">
+
+
+    <button
+    class="secondary"
+    onclick="go('play')"
+    >
+
+      ← Back
+
+    </button>
+
+
+    <div style="height:16px"></div>
+
+
+    <div class="eyebrow">
+
+      ${esc(
+        (game.game_type || "2d")
+        .toUpperCase()
+      )}
+      GAME
+
+    </div>
+
+
+    <h1 style="font-size:52px">
+
+      ${esc(game.title)}
+
+    </h1>
+
+
+    <p class="muted">
+
+      ${esc(game.description || "")}
+
+    </p>
+
+
+    <div class="meta">
+
+      <span class="tag">
+
+        Maturity:
+        ${esc(
+          game.maturity_rating || "all"
+        )}
+
+      </span>
+
+
+      ${
+        isMetxon
+        ?
+        `
+        <span class="tag">
+          Created by METXON
+        </span>
+        `
+        :
+        ""
+      }
+
+    </div>
+
+
+    <div class="player">
+
+      <canvas
+      id="canvas"
+      width="960"
+      height="480"
+      ></canvas>
+
+
+      <div class="hud">
+
+        <span id="fps">
+          FPS 60
+        </span>
+
+        <span>
+          Ping —
+        </span>
+
+        <span>
+          Quality: High
+        </span>
+
+        <span>
+          Login required
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="actions">
+
+      <button
+      class="primary"
+      onclick="playGame('${esc(game.id)}')"
+      >
+
+        ▶ Play
+
+      </button>
+
+
+      <button
+      class="secondary"
+      onclick="go('create')"
+      >
+
+        Create your own game
+
+      </button>
+
+    </div>
+
+
+    ${
+      isMetxon
+      ?
+      `
+
+      <div
+      class="details"
+      style="margin-top:18px"
+      >
+
+
+        <div class="detail">
+
+          <b>
+            Created by
+          </b>
+
+          METXON
+
+        </div>
+
+
+        <div class="detail">
+
+          <b>
+            Original company
+          </b>
+
+          METXON
+
+        </div>
+
+
+        <div class="detail">
+
+          <b>
+            Original website
+          </b>
+
+          <a
+          href="https://nidhilarthicknet.github.io/metxon/"
+          target="_blank"
+          rel="noopener"
+          >
+
+            Visit METXON
+
+          </a>
+
+        </div>
+
+
+        <div class="detail">
+
+          <b>
+            Age group
+          </b>
+
+          All ages
+
+        </div>
+
+
+        <div class="detail">
+
+          <b>
+            Chat
+          </b>
+
+          Not available with METXON
+
+        </div>
+
+
+        <div class="detail">
+
+          <b>
+            Requirements
+          </b>
+
+          Keyboard controls ·
+          Login to play
+
+        </div>
+
+
+      </div>
+
+      `
+      :
+      ""
+    }
+
+
+    <section class="section">
+
+      <div class="banner">
+
+        <div class="eyebrow">
+          MAKE YOUR OWN
+        </div>
+
+
+        <h2>
+          Create your own version
+        </h2>
+
+
+        <p class="muted">
+
+          Build and publish your own
+          game with MetGames Creator.
+
+        </p>
+
+
+        <button
+        class="primary"
+        onclick="go('create')"
+        >
+
+          Create Your Own Game
+
+        </button>
+
+      </div>
+
+    </section>
+
+  </div>
+
+  `;
+
+
+  drawGamePreview(game);
+
+}
+
+
+/* ==========================================
+   GAME PREVIEW
+=========================================== */
+
+function drawGamePreview(game){
+
+  const canvas =
+  document.getElementById("canvas");
+
+  if(!canvas){
+
+    return;
+
+  }
+
+
+  const ctx =
+  canvas.getContext("2d");
+
+
+  ctx.fillStyle =
+  "#08101e";
+
+  ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  /* Grid */
+
+  ctx.strokeStyle =
+  "#55e7ff12";
+
+  for(let i=0;i<32;i++){
+
     ctx.fillRect(
-      player.x,
-      player.y,
-      player.width,
-      player.height
+      i * 30,
+      0,
+      1,
+      canvas.height
     );
 
-    ctx.fillStyle="#ffffff";
-    ctx.font="14px Arial";
-    ctx.fillText(
-      "← → / A D to move • Space to jump",
-      15,
+  }
+
+
+  for(let i=0;i<16;i++){
+
+    ctx.fillRect(
+      0,
+      i * 30,
+      canvas.width,
+      1
+    );
+
+  }
+
+
+  /* Ground */
+
+  ctx.fillStyle =
+  "#5da7ff";
+
+  ctx.fillRect(
+    30,
+    380,
+    900,
+    25
+  );
+
+
+  /* Player */
+
+  ctx.fillStyle =
+  "#63e6a4";
+
+  ctx.fillRect(
+    70,
+    335,
+    42,
+    45
+  );
+
+
+  /* Enemy */
+
+  ctx.fillStyle =
+  "#ff5369";
+
+  ctx.fillRect(
+    620,
+    340,
+    30,
+    40
+  );
+
+
+  /* Coin */
+
+  ctx.fillStyle =
+  "#ffd45d";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    420,
+    300,
+    13,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fill();
+
+
+  /* Text */
+
+  ctx.fillStyle =
+  "#eef3ff";
+
+  ctx.font =
+  "700 17px Segoe UI";
+
+  ctx.fillText(
+    "Press Play to start · A/D or ←/→ · Space to jump",
+    30,
+    40
+  );
+
+}
+
+
+/* ==========================================
+   PLAY GAME
+=========================================== */
+
+async function playGame(id){
+
+  if(!session){
+
+    authOpen("login");
+
+    return;
+
+  }
+
+
+  /*
+    Real published games use the
+    Supabase daily-launch RPC.
+  */
+
+  if(!String(id).startsWith("demo")){
+
+    const result =
+    await db.rpc(
+      "increment_game_launch",
+      {
+        p_game_id:id
+      }
+    );
+
+
+    if(result.error){
+
+      console.warn(
+        "Launch counter:",
+        result.error.message
+      );
+
+      alert(
+        "The game runtime is ready, but the daily launch counter still needs to be connected."
+      );
+
+    }
+
+  }
+
+
+  startRuntime();
+
+}
+
+
+/* ==========================================
+   SIMPLE 2D RUNTIME
+=========================================== */
+
+function startRuntime(){
+
+  const canvas =
+  document.getElementById("canvas");
+
+  if(!canvas){
+
+    return;
+
+  }
+
+
+  const ctx =
+  canvas.getContext("2d");
+
+
+  let playerX = 100;
+
+  let playerY = 335;
+
+  let velocityY = 0;
+
+  let keys = {};
+
+  let last =
+  performance.now();
+
+  let frames = 0;
+
+  let fpsStamp =
+  last;
+
+
+  /*
+    Controls
+  */
+
+  addEventListener(
+    "keydown",
+    function(event){
+
+      keys[
+        event.key.toLowerCase()
+      ] = true;
+
+    }
+  );
+
+
+  addEventListener(
+    "keyup",
+    function(event){
+
+      keys[
+        event.key.toLowerCase()
+      ] = false;
+
+    }
+  );
+
+
+  cancelAnimationFrame(
+    runtime
+  );
+
+
+  function loop(time){
+
+    const dt =
+    Math.min(
+      .033,
+      (time-last)/1000
+    );
+
+
+    last = time;
+
+
+    /*
+      Movement
+    */
+
+    if(
+      keys.a ||
+      keys.arrowleft
+    ){
+
+      playerX -=
+      220 * dt;
+
+    }
+
+
+    if(
+      keys.d ||
+      keys.arrowright
+    ){
+
+      playerX +=
+      220 * dt;
+
+    }
+
+
+    /*
+      Jump
+    */
+
+    if(
+      (
+        keys[" "] ||
+        keys.w ||
+        keys.arrowup
+      )
+      &&
+      playerY >= 335
+    ){
+
+      velocityY =
+      -430;
+
+    }
+
+
+    velocityY +=
+    980 * dt;
+
+    playerY +=
+    velocityY * dt;
+
+
+    if(playerY > 335){
+
+      playerY = 335;
+
+      velocityY = 0;
+
+    }
+
+
+    playerX =
+    Math.max(
+      30,
+      Math.min(
+        890,
+        playerX
+      )
+    );
+
+
+    /*
+      Background
+    */
+
+    ctx.fillStyle =
+    "#08101e";
+
+    ctx.fillRect(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+
+    /*
+      Grid
+    */
+
+    ctx.fillStyle =
+    "#55e7ff12";
+
+    for(let i=0;i<32;i++){
+
+      ctx.fillRect(
+        i*30,
+        0,
+        1,
+        canvas.height
+      );
+
+    }
+
+
+    /*
+      Ground
+    */
+
+    ctx.fillStyle =
+    "#5da7ff";
+
+    ctx.fillRect(
+      30,
+      380,
+      900,
       25
     );
 
-    requestAnimationFrame(loop);
+
+    /*
+      Player
+    */
+
+    ctx.fillStyle =
+    "#63e6a4";
+
+    ctx.fillRect(
+      playerX,
+      playerY,
+      42,
+      45
+    );
+
+
+    /*
+      Enemy
+    */
+
+    ctx.fillStyle =
+    "#ff5369";
+
+    ctx.fillRect(
+      620,
+      340,
+      30,
+      40
+    );
+
+
+    /*
+      Coin
+    */
+
+    ctx.fillStyle =
+    "#ffd45d";
+
+    ctx.beginPath();
+
+    ctx.arc(
+      420,
+      300,
+      13,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    /*
+      Instructions
+    */
+
+    ctx.fillStyle =
+    "#eef3ff";
+
+    ctx.font =
+    "700 17px Segoe UI";
+
+    ctx.fillText(
+      "A/D or arrows: move · Space: jump",
+      30,
+      35
+    );
+
+
+    /*
+      FPS
+    */
+
+    frames++;
+
+
+    if(
+      time-fpsStamp > 500
+    ){
+
+      const fps =
+      Math.round(
+        frames * 1000 /
+        (time-fpsStamp)
+      );
+
+
+      const fpsElement =
+      document.getElementById("fps");
+
+
+      if(fpsElement){
+
+        fpsElement.textContent =
+        "FPS " + fps;
+
+      }
+
+
+      frames = 0;
+
+      fpsStamp =
+      time;
+
+    }
+
+
+    runtime =
+    requestAnimationFrame(
+      loop
+    );
+
   }
 
-  requestAnimationFrame(loop);
+
+  runtime =
+  requestAnimationFrame(
+    loop
+  );
+
 }
 
-/* ============================================================
-   RATINGS
-   ============================================================ */
 
-async function rateGame(gameId,rating){
-  if(!currentUser){
-    openAuth();
+/* ==========================================
+   MAIN ROUTER
+=========================================== */
+
+function render(){
+
+  const [page,id] =
+  route.split("/");
+
+
+  document
+  .querySelectorAll("[data-n]")
+  .forEach(
+    button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.n === page
+      );
+
+    }
+  );
+
+
+  if(
+    page === "game" &&
+    id
+  ){
+
+    gamePage(id);
+
     return;
+
   }
 
-  const {error}=await db
-    .from("game_ratings")
-    .upsert({
-      game_id:gameId,
-      reviewer_id:currentUser.id,
-      rating
-    },{
-      onConflict:"game_id,reviewer_id"
-    });
 
-  if(error){
-    alert(error.message);
+  if(page === "play"){
+
+    playPage();
+
     return;
+
   }
 
-  alert("Your rating was saved.");
-}
 
-/* ============================================================
-   PROFILE
-   ============================================================ */
+  if(page === "trailers"){
 
-async function renderProfile(){
-  if(!currentUser){
-    openAuth();
+    trailerPage();
+
     return;
+
   }
 
-  const app=document.getElementById("app");
 
-  const {data:games}=await db
-    .from("games")
-    .select("id,title,status,game_type")
-    .eq("owner_id",currentUser.id)
-    .order("created_at",{ascending:false});
+  if(page === "create"){
 
-  const initial=(currentProfile?.username||"U")
-    .charAt(0)
-    .toUpperCase();
+    createPage();
 
-  app.innerHTML=`
-    <div class="profile">
+    return;
 
-      <div class="profile-head">
-        <div class="avatar">${escapeHtml(initial)}</div>
+  }
 
-        <div>
-          <h2 style="margin:0">
-            ${escapeHtml(currentProfile?.display_name||"METGAMES User")}
-          </h2>
 
-          <div style="color:#8290a8">
-            @${escapeHtml(currentProfile?.username||"user")}
-          </div>
+  if(page === "profile"){
 
-          <div class="meta">
-            <span class="tag">
-              ${escapeHtml(currentProfile?.age_category||"")}
-            </span>
+    profilePage();
 
-            <span class="tag">
-              Creator rating:
-              ${Number(currentProfile?.creator_rating||0).toFixed(1)}
-            </span>
+    return;
 
-            <span class="tag">
-              Followers:
-              ${currentProfile?.followers_count||0}
-            </span>
-          </div>
-        </div>
-      </div>
+  }
 
-      <div class="section-title">
-        <h2>Your Games</h2>
-      </div>
 
-      <div class="grid">
-        ${(games||[]).length ? games.map(g=>`
-          <article class="card">
-            <div class="thumbnail">
-              ${g.game_type.toUpperCase()}
-            </div>
+  homePage();
 
-            <div class="card-body">
-              <h3>${escapeHtml(g.title)}</h3>
-
-              <div class="meta">
-                <span class="tag">${escapeHtml(g.status)}</span>
-              </div>
-
-              <button
-                class="btn"
-                style="margin-top:12px"
-                onclick="navigate('create')"
-              >
-                Creator
-              </button>
-            </div>
-          </article>
-        `).join("") : `
-          <div class="empty">
-            You haven't created a game yet.
-          </div>
-        `}
-      </div>
-
-    </div>
-  `;
 }
 
-/* ============================================================
-   UTILITIES
-   ============================================================ */
 
-function escapeHtml(value){
-  return String(value??"")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-function escapeAttr(value){
-  return escapeHtml(value);
-}
-
-/* ============================================================
-   STARTUP
-   ============================================================ */
+/* ==========================================
+   START APPLICATION
+=========================================== */
 
 async function boot(){
-  await refreshUser();
 
-  const hash=location.hash;
+  const auth =
+  await db.auth.getSession();
 
-  if(hash.startsWith("#game/")){
-    const id=hash.substring("#game/".length);
 
-    await navigate("game",{gameId:id});
-  }else{
-    await navigate("home");
+  session =
+  auth.data.session;
+
+
+  if(session){
+
+    await loadProfile();
+
   }
+
+
+  await loadGames();
+
+
+  updateAccount();
+
+  render();
+
+
+  db.auth.onAuthStateChange(
+    async function(_event,newSession){
+
+      session =
+      newSession;
+
+
+      if(newSession){
+
+        await loadProfile();
+
+      }else{
+
+        profile = null;
+
+      }
+
+
+      updateAccount();
+
+    }
+  );
+
 }
 
-window.addEventListener("hashchange",async()=>{
-  const hash=location.hash;
-
-  if(hash.startsWith("#game/")){
-    const id=hash.substring("#game/".length);
-    await navigate("game",{gameId:id});
-  }
-});
 
 boot();
+
 </script>
 
 </body>
